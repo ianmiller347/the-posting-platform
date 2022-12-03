@@ -1,3 +1,11 @@
+# The Posting Platform
+
+Create your own platform for user generated content by using this package. You can clone it and it modify it, or use the provided CLI.
+
+You can input certain params to tell the script how to generate your package. It will randomly generate some configs for you, so your site is fairly unique every time you run the generation script. You can input some params to describe how your platform should look, and it will set a few different things accordingly.
+
+## NextJS Info
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
