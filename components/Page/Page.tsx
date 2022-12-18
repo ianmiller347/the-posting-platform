@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './Page.module.css';
 
 const cx = classNames.bind(styles);
-
+ 
 interface PageProps {
   children: ReactElement;
   description: string;
@@ -20,6 +20,7 @@ const Page = ({ children, description, title }: PageProps) => (
     </Head>
 
     <main className={cx('main')}>
+      <h1>{title}</h1>
       {children}
     </main>
 

@@ -5,7 +5,7 @@ export default function Home() {
     <Page title="The Posting Platform" description="">
       <>
         <p>
-          Learn more
+          Learn more about the posting Platform here
         </p>
       </>
     </Page>
