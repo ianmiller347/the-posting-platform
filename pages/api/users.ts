@@ -4,6 +4,7 @@ interface UserContent {
   name?: string;
   imageUrl?: string;
   description?: string;
+  profileUrl?: string;
 }
 
 type Data = {
