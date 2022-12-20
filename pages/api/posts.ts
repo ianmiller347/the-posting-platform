@@ -1,10 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface PostContent {
-  text?: string;
+  titleText?: string;
+  bodyText?: string;
   imageUrl?: string;
+  imageCaption?: string;
   videoUrl?: string;
 }
+
 type Data = {
   title: string;
   content: PostContent;
@@ -23,7 +26,7 @@ export default function handler(
       .status(200)
       .json({
         title: 'Post',
-        content: { text: 'This is a part of a post.' },
+        content: { bodyText: 'This is a part of a post.' },
         id: '12345',
       });
   }
