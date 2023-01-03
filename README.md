@@ -6,11 +6,11 @@ You can input certain params to tell the script how to generate your package. It
 
 ## Developing locally
 
-First, run the development server:
+Run `yarn install` to get the dependencies installed.
+
+To run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
@@ -30,6 +30,14 @@ If you use VSCode, it's a good idea to have this in your settings.json:
     "typescriptreact"
 ],
 ```
+
+### Coding style
+
+For React components, use TitleCaseNaming both in the filename and for the component itself. The folder it lives in should have the same name and it should have an index.ts file which exports the MyComponentName file's default export.
+
+For CSS, use BEM syntax and dash-casing for classnames. Don't use camelCasing in CSS at all.
+
+You should be able to get
 
 ## NextJS Info
 
