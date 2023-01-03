@@ -1,9 +1,9 @@
-import Head from "next/head";
-import { ReactElement } from "react";
-import classNames from "classnames/bind";
-import styles from "./Page.module.css";
-import Footer from "../Footer";
-import Header from "../Header";
+import Head from 'next/head';
+import { ReactElement } from 'react';
+import classNames from 'classnames/bind';
+import styles from './Page.module.css';
+import Footer from '../Footer';
+import Header from '../Header';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,7 @@ interface PageProps {
  * @returns Page
  */
 const Page = ({ children, description, title }: PageProps) => (
-  <div className={cx("container", "page")}>
+  <div className={cx('container', 'page')}>
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
@@ -35,7 +35,7 @@ const Page = ({ children, description, title }: PageProps) => (
 
     <Header />
 
-    <main className={cx("main")}>
+    <main className={cx('main')}>
       <h1>{title}</h1>
       {children}
     </main>

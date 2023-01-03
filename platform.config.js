@@ -3,8 +3,8 @@
  * The theme can dictate how the pages will look.
  */
 const platformConfig = {
-  platformName: "The Posting Platform",
-  platformTheme: "posty",
+  platformName: 'The Posting Platform',
+  platformTheme: 'posty',
 };
 
 module.exports = platformConfig;
