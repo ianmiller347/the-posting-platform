@@ -31,6 +31,9 @@ If you use VSCode, it's a good idea to have this in your settings.json:
 ],
 ```
 
+For tailwind, visit [their docs](https://tailwindcss.com/docs/editor-setup) on setting up your editor to stop complaining.
+In VSCode, open the settings, search for 'unknown', the first result should be the one you’re looking for: CSS > Lint: Unknown At Rules. Set it to 'ignore'.
+
 ### Coding style
 
 For React components, use TitleCaseNaming both in the filename and for the component itself. The folder it lives in should have the same name and it should have an index.ts file which exports the MyComponentName file's default export.

@@ -30,7 +30,7 @@ const SignInStatus = ({ isLoading }: SignInStatusProps) => {
       <div className={cx('sign-in-status__button-container')}>
         <a
           href={buttonLink}
-          className={cx('button sign-in-status__button')}
+          className={cx('button sign-in-status__button bg-violet-500 hover:bg-violet-600')}
           onClick={(e) => {
             e.preventDefault();
             if (isSignedIn) {

@@ -36,7 +36,7 @@ const Page = ({ children, description, title }: PageProps) => (
     <Header />
 
     <main className={cx('main')}>
-      <h1>{title}</h1>
+      <h1 className={cx('page__title')}>{title}</h1>
       {children}
     </main>
 
