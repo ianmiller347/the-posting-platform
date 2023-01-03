@@ -1,9 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/react"
-import styles from "./header.module.css"
-import Nav from "./nav"
+import styles from "./Header.module.css"
+import Nav from "../Nav"
 
 export default function Header() {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
   const loading = status === 'loading'
 
   return (
