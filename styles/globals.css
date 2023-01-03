@@ -1,5 +1,9 @@
 /* The global styles are applied to all pages. */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -24,6 +28,12 @@ a {
   font-size: 1.1rem;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.button {
+  padding: .75rem 1.5rem;
+  display: inline-block;
+  border-radius: .75rem;
 }
 
 @media (prefers-color-scheme: dark) {

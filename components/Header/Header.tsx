@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/react';
 import classNames from 'classnames/bind';
-import styles from './Header.module.css';
 import Nav from '../Nav';
 import SignInStatus from './SignInStatus';
+import styles from './Header.module.css';
 
 const cx = classNames.bind(styles);
 
