@@ -1,0 +1,7 @@
+.sign-in-status {
+  display: block;
+}
+
+.sign-in-status__text {
+  font-size: 1rem;
+}

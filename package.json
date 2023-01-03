@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier . && yarn lint:fix",
+    "format": "prettier --write . && yarn lint:fix",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prepare": "husky install"
@@ -31,6 +31,6 @@
     "prettier": "^2.8.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "prettier && yarn run lint:fix"
+    "*.{js,jsx,ts,tsx}": "prettier --write && yarn run lint:fix"
   }
 }

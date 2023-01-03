@@ -1,17 +1,12 @@
-import styles from "./Footer.module.css"
+import classNames from "classnames/bind";
+import styles from './Footer.module.css';
+
+const cx = classNames.bind(styles);
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <hr />
-      <ul className={styles.navItems}>
-        <li className={styles.navItem}>
-          <a href="https://www.npmjs.com/package/next-auth">NPM</a>
-        </li>
-        <li className={styles.navItem}>
-          <a href="https://github.com/nextauthjs/next-auth-example">GitHub</a>
-        </li>
-      </ul>
+    <footer className={cx('footer')}>
+      The Posting Platform
     </footer>
-  )
+  );
 }

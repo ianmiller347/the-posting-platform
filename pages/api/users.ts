@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
 
 interface UserContent {
   name?: string;
@@ -18,15 +18,13 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   // res.status(200).json({ name: 'John Doe' })
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     // handlePostRequest
   } else {
-    res
-      .status(200)
-      .json({
-        title: 'User',
-        content: { name: 'Joseph', description: "A real Josh."},
-        id: '12345',
-      });
+    res.status(200).json({
+      title: "User",
+      content: { name: "Joseph", description: "A real Josh." },
+      id: "12345",
+    });
   }
 }
