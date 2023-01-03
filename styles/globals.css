@@ -1,4 +1,4 @@
-/* The global styles are applied to all pages */
+/* The global styles are applied to all pages. */
 
 html,
 body {
@@ -34,7 +34,7 @@ a {
     color: white;
     background: black;
   }
-  
+
   .code {
     background: #111;
   }

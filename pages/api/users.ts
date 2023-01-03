@@ -21,12 +21,10 @@ export default function handler(
   if (req.method === 'POST') {
     // handlePostRequest
   } else {
-    res
-      .status(200)
-      .json({
-        title: 'User',
-        content: { name: 'Joseph', description: "A real Josh."},
-        id: '12345',
-      });
+    res.status(200).json({
+      title: 'User',
+      content: { name: 'Joseph', description: 'A real Josh.' },
+      id: '12345',
+    });
   }
 }

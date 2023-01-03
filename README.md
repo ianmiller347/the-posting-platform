@@ -4,29 +4,44 @@ Create your own platform for user generated content by using this package. You c
 
 You can input certain params to tell the script how to generate your package. It will randomly generate some configs for you, so your site is fairly unique every time you run the generation script. You can input some params to describe how your platform should look, and it will set a few different things accordingly.
 
-## NextJS Info
+## Developing locally
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Run `yarn install` to get the dependencies installed.
 
-## Getting Started
-
-First, run the development server:
+To run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Setting your IDE to work with this project
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+If you use VSCode, it's a good idea to have this in your settings.json:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+},
+"eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact"
+],
+```
 
-## Learn More
+### Coding style
+
+For React components, use TitleCaseNaming both in the filename and for the component itself. The folder it lives in should have the same name and it should have an index.ts file which exports the MyComponentName file's default export.
+
+For CSS, use BEM syntax and dash-casing for classnames. Don't use camelCasing in CSS at all.
+
+You should be able to get
+
+## NextJS Info
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 To learn more about Next.js, take a look at the following resources:
 
