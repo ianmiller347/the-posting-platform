@@ -4,6 +4,12 @@ Create your own platform for user generated content by using this package. You c
 
 You can input certain params to tell the script how to generate your package. It will randomly generate some configs for you, so your site is fairly unique every time you run the generation script. You can input some params to describe how your platform should look, and it will set a few different things accordingly.
 
+## Roadmap
+
+- Create .env on build, inject params based on input
+- Allow input for AWS region
+- Allow input for alternative post/object-types aside from Users and Posts and generate CRUD methods from them
+
 ## Developing locally
 
 Run `yarn install` to get the dependencies installed.
@@ -39,8 +45,6 @@ In VSCode, open the settings, search for 'unknown', the first result should be t
 For React components, use TitleCaseNaming both in the filename and for the component itself. The folder it lives in should have the same name and it should have an index.ts file which exports the MyComponentName file's default export.
 
 For CSS, use BEM syntax and dash-casing for classnames. Don't use camelCasing in CSS at all.
-
-You should be able to get
 
 ## NextJS Info
 
