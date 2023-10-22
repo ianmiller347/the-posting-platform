@@ -1,13 +1,10 @@
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
-  DynamoDBClient,
-  PutItemCommand,
-  GetItemCommand,
-  GetItemCommandInput,
-  UpdateItemCommand,
-  UpdateItemCommandInput,
-  AttributeValue,
-} from '@aws-sdk/client-dynamodb';
-import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
+  DynamoDBDocumentClient,
+  PutCommand,
+  UpdateCommand,
+  GetCommand,
+} from '@aws-sdk/lib-dynamodb';
 
 // AWS setup
 // TODO: change region to come from input.
@@ -28,55 +25,61 @@ const client = new DynamoDBClient({
   },
 });
 
+const ddbDocClient = DynamoDBDocumentClient.from(client);
+
 // the Item type will change based on the input!
 // a generic Item type will have id, slug, displayName
 // specific items will have different fields
 // TODO: Change the item typescript type based on the input
-interface UnmarshalledItem {
+interface Item {
   id: string;
   slug: string;
   displayName: string;
 }
-type MarshalledItem = Record<string, AttributeValue>;
 
-function convertDynamoDBItemToItem(
-  dynamoDBItem: MarshalledItem
-): UnmarshalledItem {
-  return unmarshall(dynamoDBItem) as UnmarshalledItem;
-}
-
-export async function createItem(
-  item: UnmarshalledItem,
-  tableName: string
-): Promise<void> {
+/**
+ * Create Item helper wrapper
+ * @param item item to put into the database
+ * @param tableName name of the table to add the item to
+ */
+export async function createItem(item: Item, tableName: string): Promise<void> {
   const params = {
     TableName: tableName,
-    Item: marshall(item),
+    Item: item,
   };
 
-  const command = new PutItemCommand(params);
+  const command = new PutCommand(params);
 
   try {
-    await client.send(command);
+    await ddbDocClient.send(command);
   } catch (error) {
     throw new Error('Unable to create item in DynamoDB.');
   }
 }
 
-async function getItem<Key>(
-  key: Key,
+/**
+ *
+ * @param keyName name of the key to get object by, usually id or slug
+ * @param keyValue value of the key to get object by,
+ * @param tableName
+ * @returns Item if there was an item found, undefined otherwise.
+ */
+export async function getItem(
+  keyName: string,
+  keyValue: string,
   tableName: string
-): Promise<UnmarshalledItem | undefined> {
-  const params: GetItemCommandInput = {
+): Promise<Item | undefined> {
+  const params = {
     TableName: tableName,
-    Key: marshall(key),
+    Key: {
+      [keyName]: keyValue,
+    },
   };
 
   try {
-    const result = await client.send(new GetItemCommand(params));
+    const result = await ddbDocClient.send(new GetCommand(params));
     if (result.Item) {
-      const unmarshalledItem = convertDynamoDBItemToItem(result.Item);
-      return unmarshalledItem;
+      return result.Item as Item;
     }
   } catch (error) {
     throw new Error('Unable to get item from DynamoDB.');
@@ -90,7 +93,7 @@ async function getItem<Key>(
  * @param id id key for the item to be updated
  * @param updateFields a subset of the Record that will be updated, excluding the ID field.
  */
-async function updateItemById(
+export async function updateItemById(
   tableName: string,
   id: string,
   updateFields: Record<string, any>
@@ -119,20 +122,20 @@ async function updateItemById(
     ])
   );
 
-  const params: UpdateItemCommandInput = {
+  const params = {
     TableName: tableName,
-    Key: marshall({ id: id }),
+    Key: { id },
     UpdateExpression: updateExpression,
     ExpressionAttributeNames: expressionAttributeNames,
-    ExpressionAttributeValues: marshall(expressionAttributeValues),
+    ExpressionAttributeValues: expressionAttributeValues,
   };
 
-  const input = new UpdateItemCommand(params);
+  const input = new UpdateCommand(params);
 
   try {
-    await client.send(input);
+    await ddbDocClient.send(input);
   } catch (error) {
-    // Handle errors
+    throw new Error('Unable to update item in DynamoDB.');
   }
 }
 
