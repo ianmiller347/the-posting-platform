@@ -9,10 +9,16 @@ You can input certain params to tell the script how to generate your package. It
 - Create .env on build, inject params based on input
 - Allow input for AWS region
 - Allow input for alternative post/object-types aside from Users and Posts and generate CRUD methods from them
+- Allow input for alternative DDB table names or prefixes
+
+> Alternative recommended
+> Use an Integrated Development Environment (IDE) which supports the AWS Toolkit enabling authentication through IAM Identity Center.
 
 ## Developing locally
 
 Run `yarn install` to get the dependencies installed.
+
+You need an AWS account with a table named "Users" and a table named "Posts".
 
 To run the development server:
 
