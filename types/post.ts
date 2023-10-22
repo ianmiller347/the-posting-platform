@@ -11,7 +11,6 @@ export interface PostContent {
 
 export interface PostData extends Item {
   content: PostContent;
-  id: string;
   displayName?: string;
   uri?: string; // this is optional for a post that is newly created and hasnt autosaved yet
 }

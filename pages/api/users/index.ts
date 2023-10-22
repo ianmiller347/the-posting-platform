@@ -1,27 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PostData } from '../../../types/post';
 import { ResponseData } from '../../../types/responseData';
+import { User } from '../../../types/user';
 import { createItem, getAllItems } from '../../../helpers/aws';
 
-export const POSTS_TABLE = 'Posts';
+export const USERS_TABLE = 'Users';
 
-// consider using Edge api routes instead. https://nextjs.org/docs/api-routes/edge-api-routes
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PostData | PostData[] | ResponseData>
+  res: NextApiResponse<User | User[] | ResponseData>
 ) {
   switch (req.method) {
     case 'POST':
+      // create a new user
       const newPost = req.body;
-      await createItem(POSTS_TABLE, newPost);
+      await createItem(USERS_TABLE, newPost);
       res.status(200).json(newPost);
       break;
     case 'GET':
-      const listOfPosts = await getAllItems(POSTS_TABLE);
-      res.status(200).json(listOfPosts as PostData[]);
+      // TODO: get list of users by some criteria, for example a hi scores page.
+      const listOfUsers = await getAllItems(USERS_TABLE);
+      res.status(200).json(listOfUsers as User[]);
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST', 'PUT']);
+      res.setHeader('Allow', ['GET', 'POST']);
       res.status(405).end('Method Not Allowed');
       break;
   }
