@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PostData } from '../../../types/post';
+import { User } from '../../../types/user';
 import { ResponseData } from '../../../types/responseData';
 import { getItem, updateItemById } from '../../../helpers/aws';
-import { POSTS_TABLE } from '.';
+import { USERS_TABLE } from '.';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PostData | ResponseData>
+  res: NextApiResponse<User | User[] | ResponseData>
 ) {
   // if id is in fact an array dont support it for now.
   // just pull the first id from the array.
@@ -22,12 +22,12 @@ export default async function handler(
   switch (req.method) {
     case 'PUT':
       const { updateFields } = req.body;
-      await updateItemById(POSTS_TABLE, id, updateFields);
+      await updateItemById(USERS_TABLE, id, updateFields);
       res.status(204).end();
       break;
     case 'GET':
-      const post = await getItem('id', id, POSTS_TABLE);
-      res.status(200).json(post as PostData);
+      const post = await getItem('id', id, USERS_TABLE);
+      res.status(200).json(post as User);
       break;
     default:
       res.setHeader('Allow', ['GET', 'PUT']);
@@ -35,7 +35,7 @@ export default async function handler(
       break;
   }
 
-  const post = await getItem('id', id, POSTS_TABLE);
+  const post = await getItem('id', id, USERS_TABLE);
   if (!post) {
     return res.status(404).json({
       status: 404,
@@ -43,5 +43,5 @@ export default async function handler(
     });
   }
 
-  res.status(200).json(post as PostData);
+  res.status(200).json(post as User);
 }
