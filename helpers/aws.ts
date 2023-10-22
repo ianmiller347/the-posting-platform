@@ -6,6 +6,7 @@ import {
   GetCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
+import { randomUUID } from 'crypto';
 import { Item } from '../types/item';
 
 // AWS setup
@@ -29,7 +30,6 @@ const client = new DynamoDBClient({
 
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-// the Item type will change based on the input!
 /**
  * Create Item helper wrapper
  * @param item item to put into the database
@@ -39,9 +39,13 @@ export async function createItem<T extends Item>(
   tableName: string,
   item: T
 ): Promise<void> {
+  const newId = randomUUID();
   const params = {
     TableName: tableName,
-    Item: item,
+    Item: {
+      ...item,
+      id: newId,
+    },
   };
 
   const command = new PutCommand(params);
