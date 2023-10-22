@@ -4,7 +4,9 @@ import {
   PutCommand,
   UpdateCommand,
   GetCommand,
+  ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
+import { Item } from '../types/item';
 
 // AWS setup
 // TODO: change region to come from input.
@@ -28,21 +30,15 @@ const client = new DynamoDBClient({
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
 // the Item type will change based on the input!
-// a generic Item type will have id, slug, displayName
-// specific items will have different fields
-// TODO: Change the item typescript type based on the input
-interface Item {
-  id: string;
-  slug: string;
-  displayName: string;
-}
-
 /**
  * Create Item helper wrapper
  * @param item item to put into the database
  * @param tableName name of the table to add the item to
  */
-export async function createItem(item: Item, tableName: string): Promise<void> {
+export async function createItem<T extends Item>(
+  tableName: string,
+  item: T
+): Promise<void> {
   const params = {
     TableName: tableName,
     Item: item,
@@ -64,11 +60,11 @@ export async function createItem(item: Item, tableName: string): Promise<void> {
  * @param tableName
  * @returns Item if there was an item found, undefined otherwise.
  */
-export async function getItem(
+export async function getItem<T extends Item>(
   keyName: string,
   keyValue: string,
   tableName: string
-): Promise<Item | undefined> {
+): Promise<T | undefined> {
   const params = {
     TableName: tableName,
     Key: {
@@ -79,12 +75,30 @@ export async function getItem(
   try {
     const result = await ddbDocClient.send(new GetCommand(params));
     if (result.Item) {
-      return result.Item as Item;
+      return result.Item as T;
     }
   } catch (error) {
     throw new Error('Unable to get item from DynamoDB.');
   }
   return undefined;
+}
+
+export async function getAllItems<T extends Item>(
+  tableName: string
+): Promise<T[]> {
+  const params = {
+    TableName: tableName,
+  };
+
+  try {
+    const result = await ddbDocClient.send(new ScanCommand(params));
+    if (result.Items) {
+      return result.Items as T[];
+    }
+  } catch (error) {
+    throw new Error('Unable to list items from DynamoDB.');
+  }
+  return [];
 }
 
 /**

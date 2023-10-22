@@ -1,3 +1,5 @@
+import { Item } from './item';
+
 export interface PostContent {
   titleText?: string;
   bodyText?: string; // this is a simple string of the body
@@ -7,8 +9,9 @@ export interface PostContent {
   bodyRichContent?: string; // this is a string of HTML markup for the body. it can be used in place of simple text.
 }
 
-export type PostData = {
+export interface PostData extends Item {
   content: PostContent;
   id: string;
+  displayName?: string;
   uri?: string; // this is optional for a post that is newly created and hasnt autosaved yet
-};
+}
