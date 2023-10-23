@@ -1,27 +1,17 @@
-import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 import { PostData } from '../types/post';
-
-// change this to be a helper
-const fetchAllPosts = async () => {
-  const response = await fetch('/api/posts', {
-    method: 'GET',
-  });
-  return response.json();
-}
+import { useGetPostsQuery } from '../state/post';
+import SkeletonLoaderBars from '../components/SkeletonLoaderBars';
 
 export default function Home() {
-  // this should use redux toolkit instead of internal component state.
-  const [posts, setPosts] = useState<PostData[]>();
-  // change this to use api helpers and perhaps even redux toolkit helpers for enhanced caching.
-  useEffect(() => {
-    fetchAllPosts().then(data => setPosts(data));
-  }, []);
+  const { data, error, isLoading } = useGetPostsQuery('');
+  const posts: PostData[] = data?.posts;
 
   return (
     <Page title="The Posting Platform" description="">
       <>
         <p>Learn more about the posting Platform here</p>
+        {isLoading && <SkeletonLoaderBars />}
         <ul>
           {posts?.map(post => (
               <ol key={post.id} className="border mb-2">
@@ -30,6 +20,11 @@ export default function Home() {
               </ol>
           ))}
         </ul>
+        {error && (
+          <div className="error">
+            Sorry, there was an error loading posts.
+          </div>
+        )}
       </>
     </Page>
   );
