@@ -3,6 +3,7 @@ import { Item } from '../types/item';
 import { ResponseData } from '../types/responseData';
 import { getItem, updateItemById } from '../helpers/aws';
 
+// crud handler which is used for [id] route
 export default async function crudHandlerWithIdParam<ItemType extends Item>(
   req: NextApiRequest,
   res: NextApiResponse<ItemType | ResponseData>,

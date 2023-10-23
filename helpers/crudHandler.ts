@@ -1,16 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  createItem,
-  updateItemById,
-  getItem,
-  getAllItems,
-} from '../helpers/aws';
+import { createItem, getAllItems } from '../helpers/aws';
 import { Item } from '../types/item';
 import { ResponseData } from '../types/responseData';
-
-// Define table names as constants
-const USERS_TABLE = 'YourUsersTableName';
-const POSTS_TABLE = 'YourPostsTableName';
 
 /**
  * generic handler function to handle crud methods when no ID is passed as input.
