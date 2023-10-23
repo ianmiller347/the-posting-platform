@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PostData } from '../../../types/post';
 import { ResponseData } from '../../../types/responseData';
-import { createItem, getAllItems } from '../../../helpers/aws';
+import crudHandler from '../../../helpers/crudHandler';
 
 export const POSTS_TABLE = 'Posts';
 
@@ -10,19 +10,5 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PostData | PostData[] | ResponseData>
 ) {
-  switch (req.method) {
-    case 'POST':
-      const newPost = req.body;
-      await createItem(POSTS_TABLE, newPost);
-      res.status(200).json(newPost);
-      break;
-    case 'GET':
-      const listOfPosts = await getAllItems(POSTS_TABLE);
-      res.status(200).json(listOfPosts as PostData[]);
-      break;
-    default:
-      res.setHeader('Allow', ['GET', 'POST', 'PUT']);
-      res.status(405).end('Method Not Allowed');
-      break;
-  }
+  return crudHandler<PostData>(req, res, POSTS_TABLE);
 }
