@@ -53,7 +53,9 @@ export async function createItem<T extends Item>(
   try {
     await ddbDocClient.send(command);
   } catch (error) {
-    throw new Error('Unable to create item in DynamoDB.');
+    const errorMessage = 'Unable to create item in DynamoDB.';
+    console.error(errorMessage);
+    throw new Error(errorMessage);
   }
 }
 
@@ -100,6 +102,7 @@ export async function getAllItems<T extends Item>(
       return result.Items as T[];
     }
   } catch (error) {
+    console.error('cant list items from DDB');
     throw new Error('Unable to list items from DynamoDB.');
   }
   return [];
