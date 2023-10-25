@@ -21,6 +21,7 @@ const postCreationSlice = createSlice({
   reducers: {
     setNewPostData: (state, action) => {
       state.displayName = action.payload.displayName;
+      state.uri = action.payload.uri;
       state.content = action.payload.content;
     },
     resetNewPostData: (state) => {

@@ -6,10 +6,21 @@ const NewPostForm = () => {
   const dispatch = useAppDispatch();
   const newPost = useAppSelector((state) => state.postCreation);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    // Dispatch an action to update the Redux state
-    dispatch(setNewPostData({ ...newPost, [name]: value }));
+    // Dispatch an action to update the Redux state, only to the content object.
+    // TODO: also update uri and displayName?
+    dispatch(
+      setNewPostData({
+        ...newPost,
+        content: {
+          ...newPost.content,
+          [name]: value,
+        },
+      })
+    );
   };
 
   return (
@@ -24,7 +35,8 @@ const NewPostForm = () => {
         <input
           type="text"
           id="new-post-title"
-          name="content.titleText"
+          name="titleText"
+          onChange={handleChange}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>
@@ -35,10 +47,9 @@ const NewPostForm = () => {
         >
           Post body
         </label>
-        <input
-          type="text"
+        <textarea
           id="new-post-text-body"
-          name="content.bodyText"
+          name="bodyText"
           onChange={handleChange}
           className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />

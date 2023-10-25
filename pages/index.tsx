@@ -4,8 +4,7 @@ import { useGetPostsQuery } from '../state/post';
 import SkeletonLoaderBars from '../components/SkeletonLoaderBars';
 
 export default function Home() {
-  const { data, error, isLoading } = useGetPostsQuery('');
-  const posts: PostData[] = data?.posts;
+  const { data: posts, error, isLoading } = useGetPostsQuery('');
 
   return (
     <Page title="The Posting Platform" description="">
@@ -13,17 +12,15 @@ export default function Home() {
         <p>Learn more about the posting Platform here</p>
         {isLoading && <SkeletonLoaderBars />}
         <ul>
-          {posts?.map(post => (
-              <ol key={post.id} className="border mb-2">
-                <h3 className="text-lg">{post.content.titleText}</h3>
-                <p>{post.content.bodyText}</p>
-              </ol>
+          {posts?.map((post: PostData) => (
+            <ol key={post.id} className="border mb-2">
+              <h3 className="text-lg">{post.content.titleText}</h3>
+              <p>{post.content.bodyText}</p>
+            </ol>
           ))}
         </ul>
         {error && (
-          <div className="error">
-            Sorry, there was an error loading posts.
-          </div>
+          <div className="error">Sorry, there was an error loading posts.</div>
         )}
       </>
     </Page>
