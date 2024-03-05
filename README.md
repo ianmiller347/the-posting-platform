@@ -6,7 +6,21 @@ You can input certain params to tell the script how to generate your package. It
 
 ## How to use
 
+There are two ways to use the posting platform 1. use the npm module or 2. clone this package
+
 Requirements include yarn and node. You need at least node 18.
+
+### Using the npm module
+
+Create your new app by just passing a name. Be sure to run this from the directory where you hold all your projects.
+
+```
+npx the-posting-platform my-app-name
+```
+
+This will create your new app in a subdirectory from your current directory. It will then copy the needed boilerplate files over and prompt you for some inputs on what you wanna name this app and stuff.
+
+### Cloning this package
 
 You can run these scripts to get all the functionality of this platform. For now, you pull this repo and run its scripts, which clone necessary boilerplate to your package. Then, you run the platform-setup script to customize your app.
 

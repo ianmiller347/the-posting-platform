@@ -39,10 +39,10 @@ function setEnvVariable(key, value) {
   fs.writeFileSync('.env', envContent);
 }
 
-(async () => {
+async function setupPlatform() {
   // Prompt user for app name
   const appName = await prompt(
-    'What name do you want to use for your new app? '
+    'What name do you want to use for your new app? (App Name) '
   );
   setEnvVariable('APP_NAME', appName);
 
@@ -64,8 +64,9 @@ function setEnvVariable(key, value) {
   const awsRegion = await prompt(
     'What AWS region do you want to use? (Enter for default: us-east-1) '
   );
-  const awsRegionDefault = awsRegion || 'us-east-1'; // Default to us-east-1 if user doesn't input anything
-  setEnvVariable('AWS_REGION', awsRegionDefault);
+  // Default to us-east-1 if user doesn't input anything
+  const awsRegionDefault = 'us-east-1';
+  setEnvVariable('AWS_REGION', awsRegion || awsRegionDefault);
 
   const awsSecretAccessKey = await prompt('What is your AWS secret key? ');
   setEnvVariable('AWS_SECRET_ACCESS_KEY', awsSecretAccessKey);
@@ -94,4 +95,6 @@ function setEnvVariable(key, value) {
     'What is the from address for your email server? '
   );
   setEnvVariable('EMAIL_SERVER_FROM', emailServerFrom);
-})();
+}
+
+module.exports = setupPlatform;
