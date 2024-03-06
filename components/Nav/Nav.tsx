@@ -19,6 +19,9 @@ export default function Nav() {
         <li className={cx('nav__list-item')}>
           <Link href="/users">Users</Link>
         </li>
+        <li className={cx('nav__list-item')}>
+          <Link href="/profile">Profile</Link>
+        </li>
       </ul>
     </nav>
   );

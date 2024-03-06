@@ -9,7 +9,11 @@
     "format": "prettier --write . && yarn lint:fix",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup-script": "node setupScript.js"
+  },
+  "bin": {
+    "create-posting-platform": "setupProject.js"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.254.0",

@@ -4,6 +4,62 @@ Create your own platform for user generated content by using this package. You c
 
 You can input certain params to tell the script how to generate your package. It will randomly generate some configs for you, so your site is fairly unique every time you run the generation script. You can input some params to describe how your platform should look, and it will set a few different things accordingly.
 
+## How to use
+
+There are two ways to use the posting platform 1. use the npm module or 2. clone this package
+
+Requirements include yarn and node. You need at least node 18.
+
+### Using the npm module
+
+Create your new app by just passing a name. Be sure to run this from the directory where you hold all your projects.
+
+```
+npx the-posting-platform my-app-name
+```
+
+This will create your new app in a subdirectory from your current directory. It will then copy the needed boilerplate files over and prompt you for some inputs on what you wanna name this app and stuff.
+
+### Cloning this package
+
+You can run these scripts to get all the functionality of this platform. For now, you pull this repo and run its scripts, which clone necessary boilerplate to your package. Then, you run the platform-setup script to customize your app.
+
+You have the freedom of creating your own next app, rather than this platform dictating some out of date version.
+
+```
+npx create-next-app my-new-app --typescript
+cd my-new-app
+rm -rf pages
+git clone https://github.com/ianmiller347/the-posting-platform.git
+cd the-posting-platform
+yarn run setup-script
+```
+
+Now your necessary files have been copied over. Next let's install dependencies.
+
+```
+# go back to your app root
+cd ../
+# run the install script from your app root
+node the-posting-platform/installDependencies.js
+```
+
+Great now let's setup your platform
+
+```
+node platformSetup.js
+```
+
+Answer the questions to populate necessary variables to power your app.
+
+That's it!
+
+Now you can delete the posting platform directory
+
+```
+rm -rf the-posting-platform
+```
+
 ## Roadmap
 
 - Create .env on build, inject params based on input

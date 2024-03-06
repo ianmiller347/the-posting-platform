@@ -3,8 +3,11 @@
  * The theme can dictate how the pages will look.
  */
 const platformConfig = {
-  platformName: 'The Posting Platform',
-  platformTheme: 'posty',
+  platformName: process.env.APP_NAME || 'The Posting Platform',
+  platformDescription:
+    process.env.APP_DESCRIPTION ||
+    'Post things on the posting platform. It is the platform for posting. Check out the posts on the posting platform.',
+  platformTheme: process.env.APP_THEME || 'posty',
 };
 
 module.exports = platformConfig;

@@ -10,8 +10,7 @@ import { randomUUID } from 'crypto';
 import { Item } from '../types/item';
 
 // AWS setup
-// TODO: change region to come from input.
-const REGION = 'us-east-1';
+const fallbackRegion = 'us-east-1';
 
 let accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 let secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
@@ -21,7 +20,7 @@ if (!accessKeyId || !secretAccessKey) {
 }
 
 const client = new DynamoDBClient({
-  region: REGION,
+  region: process.env.AWS_REGION || fallbackRegion,
   credentials: {
     accessKeyId,
     secretAccessKey,
